@@ -2,3 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities
+
+.primary-bg {
+  @taiwind bg-indigo-600;
+}
+
+.primary-text-color {
+
+}
+
