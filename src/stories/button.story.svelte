@@ -1,11 +1,41 @@
-<script>
-  export let Hst
+<script lang="ts">
+  import type { Hst as HstType } from '@histoire/plugin-svelte';
+  import Button, { ButtonSize, ButtonStyle } from '../components/button.svelte';
+  
+  export let Hst: HstType; 
+
+  let disabled = false;
+  let content = 'Button text';
+  let sizeSelect = ButtonSize.MEDIUM;
+  let buttonStyle = ButtonStyle.PRIMARY;
 </script>
 
-<Hst.Story>
-  <button type="button" class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Button text</button>
-  <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Button text</button>
-  <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Button text</button>
-  <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Button text</button>
-  <button type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Button text</button>
+<Hst.Story title="Button">
+  <svelte:fragment slot="controls">
+      <Hst.Text bind:value={content} title="Content" />
+      <Hst.Checkbox bind:value={disabled} title="Disabled" />
+      <Hst.Select 
+        title="Size" 
+        bind:value={sizeSelect} 
+        options={[
+          ButtonSize.XSMALL,
+          ButtonSize.SMALL,
+          ButtonSize.MEDIUM,
+          ButtonSize.LARGE,
+          ButtonSize.XLARGE
+        ]} 
+      />
+      <Hst.Select 
+        title="Style" 
+        bind:value={buttonStyle} 
+        options={[
+          ButtonStyle.PRIMARY,
+          ButtonStyle.SECONDARY
+        ]} 
+      />
+  </svelte:fragment>
+  <Hst.Variant title="default">
+    <Button lable={content} style={buttonStyle} size={sizeSelect} disabled={disabled}/>
+  </Hst.Variant>
+  
 </Hst.Story>
